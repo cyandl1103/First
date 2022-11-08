@@ -1,4 +1,4 @@
-
+set sql_safe_updates = 1;
 
 -- create table --
 CREATE TABLE `login` (
@@ -31,15 +31,22 @@ create table post (
 
 -- alter table --
 alter table post change column id num int;
+alter table login add `admin` int default 0;
 
 -- insert values --
 	-- 유저 추가 --
-insert into login (id, pw, name) 
-	values('admin', 'admin', 'admin');
+insert into login (id, pw, `name`, `admin`) 
+	values('admin', 'admin', 'admin', 1);
 	
     -- 게시물 추가 -- 
 insert into post (num, textTitle, textWriting, textDate, author) 
 	values(1, 'example title', 'example writing', curdate(), 'admin');
+    
+    
+-- update values --
+	-- 유저 정보 수정 --
+update login set `admin` = 1 where id = 'admin';
+
     
 -- select --
 select * from login;
